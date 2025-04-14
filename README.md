@@ -51,7 +51,7 @@ espacos-publicitarios-frontend-main/
 
 2. Certifique-se de que o `docker-compose.yml` está no diretório do backend e que o caminho de build do frontend aponta corretamente para `../espacos-publicitarios-frontend-main`
 
-3. ## Organização dos Diretórios (Backend)
+3. Organização dos Diretórios (Backend)
 
 Após extrair o ZIP, a estrutura do backend ficará assim:
 
