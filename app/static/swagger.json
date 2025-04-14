@@ -1,0 +1,162 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Espacos Publicitarios API",
+    "description": "API para gerenciamento de espaços publicitários",
+    "version": "1.0.0"
+  },
+  "host": "",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/espacos": {
+      "get": {
+        "summary": "Listar espaços publicitários",
+        "description": "Retorna todos os espaços publicitários disponíveis na loja.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Lista de espaços publicitários",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Espaco"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Criar um novo espaço publicitário",
+        "description": "Adiciona um novo espaço publicitário com nome, descrição, status, loja_id e marca_id.",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": { "type": "string" },
+                "descricao": { "type": "string" },
+                "status": { "type": "string" },
+                "loja_id": { "type": "integer" },
+                "marca_id": { "type": "integer" }
+              },
+              "required": ["nome", "descricao", "status", "loja_id", "marca_id"]
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Espaço criado com sucesso" },
+          "400": { "description": "Dados inválidos" }
+        }
+      }
+    },
+    "/espacos/{id}": {
+      "put": {
+        "summary": "Atualizar a marca de um espaço publicitário",
+        "description": "Atualiza o campo marca_id de um espaço publicitário existente.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do espaço publicitário a ser atualizado"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "marca_id": {
+                  "type": "integer",
+                  "example": 2
+                }
+              },
+              "required": ["marca_id"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Marca atualizada com sucesso"
+          },
+          "400": {
+            "description": "Erro de validação"
+          },
+          "404": {
+            "description": "Espaço ou marca não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir um espaço publicitário",
+        "description": "Remove um espaço publicitário pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do espaço a ser excluído"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Espaço deletado com sucesso"
+          },
+          "404": {
+            "description": "Espaço não encontrado"
+          }
+        }
+      }
+    },
+    "/marcas": {
+      "get": {
+        "summary": "Listar marcas disponíveis",
+        "description": "Retorna todas as marcas cadastradas",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Lista de marcas",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Marca"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Espaco": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer", "example": 1 },
+        "nome": { "type": "string", "example": "Display Entrada" },
+        "status": { "type": "string", "example": "ocupado" },
+        "descricao": { "type": "string", "example": "Display eletrônico na entrada principal" },
+        "loja": { "type": "string", "example": "TechHome Store" },
+        "loja_id": { "type": "integer", "example": 1 },
+        "marca": { "type": "string", "example": "Samsung" },
+        "marca_id": { "type": "integer", "example": 1 }
+      }
+    },
+    "Marca": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer", "example": 1 },
+        "nome": { "type": "string", "example": "LG" }
+      }
+    }
+  }
+}
