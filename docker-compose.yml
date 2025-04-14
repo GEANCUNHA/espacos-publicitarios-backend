@@ -10,7 +10,7 @@ services:
       - FLASK_ENV=development
 
   frontend:
-    build: ../espacos-publicitarios-frontend-main/espacos-publicitarios-frontend-main
+    build: ../espacos-publicitarios-frontend-main
     container_name: frontend
     ports:
       - "3000:80"
